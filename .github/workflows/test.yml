@@ -25,5 +25,3 @@ jobs:
 
       - name: Run Tests
         run: cd AutoTest-Suite && mvn test
-
-git add .github && git commit -m "feat: add GitHub Actions CI/CD workflow" && git push
