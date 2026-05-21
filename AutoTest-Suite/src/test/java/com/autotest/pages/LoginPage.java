@@ -2,9 +2,8 @@ package com.autotest.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.time.Duration;
 
 public class LoginPage {
@@ -14,10 +13,11 @@ public class LoginPage {
     private By usernameField = By.id("user-name");
     private By passwordField = By.id("password");
     private By loginButton = By.id("login-button");
+    private By errorContainer = By.cssSelector(".error-message-container");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
 
     public void open() {
@@ -40,11 +40,9 @@ public class LoginPage {
     }
 
     public String getErrorMessage() {
-        try { Thread.sleep(2000); } catch (Exception e) {}
-        WebElement container = driver.findElement(By.cssSelector(".error-message-container"));
-        System.out.println("ERROR CONTAINER HTML: " + container.getAttribute("innerHTML"));
-        System.out.println("ERROR CONTAINER TEXT: " + container.getText());
-        return container.getText();
+        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(
+            By.cssSelector(".error-message-container h3"), 0));
+        return driver.findElement(By.cssSelector(".error-message-container h3")).getText();
     }
 
     public String getCurrentUrl() {
