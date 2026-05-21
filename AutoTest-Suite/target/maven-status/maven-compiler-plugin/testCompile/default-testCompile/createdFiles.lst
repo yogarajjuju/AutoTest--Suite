@@ -1,0 +1,3 @@
+com/autotest/pages/LoginPage.class
+com/autotest/utils/DriverManager.class
+com/autotest/tests/LoginTest.class
